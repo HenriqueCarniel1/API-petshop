@@ -21,7 +21,11 @@ exports.Add = async (req, res) => {
 };
 
 exports.Get = async (req, res) => {
-    const sql = 'SELECT * FROM Users;';
+    const sql = `
+        SELECT *
+        FROM Users
+        WHERE DATE(data) = CURRENT_DATE;
+    `;
 
     try {
         const result = await db.query(sql);
