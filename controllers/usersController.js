@@ -26,7 +26,6 @@ exports.Get = async (req, res) => {
         return res.status(400).send('Data não fornecida');
     }
 
-    // SQL query que seleciona todos os registros na tabela 'Users' onde a data da coluna 'data' é igual à data passada como parâmetro
     const sql = `
         SELECT *
         FROM Users
@@ -34,13 +33,10 @@ exports.Get = async (req, res) => {
     `;
 
     try {
-        // Executa a consulta no banco de dados com a data fornecida
-        const result = await db.query(sql, [date]);  // Passa a data como parâmetro para evitar SQL injection
+        const result = await db.query(sql, [date]); 
         console.log('Dados retornados:', result.rows);
-        // Retorna os resultados da consulta em formato JSON
         res.status(200).json(result.rows);
     } catch (err) {
-        // Loga e retorna um erro em caso de falha na consulta
         console.error('Error fetching data:', err);
         res.status(500).send('Erro ao buscar dados');
     }
